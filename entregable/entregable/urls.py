@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base),
     path('AppRoser/', include('AppRoser.urls')),
-
+]
 
