@@ -7,6 +7,5 @@ urlpatterns = [
     path('crear/<nombre>/', views.crear),
     path('crear/<nombre>/<apellido>/', views.crear),
     path('crear/<nombre>/<apellido>/<dni>/', views.crear),
-    path('crear/<nombre>/<apellido>/<dni>/<parentesco>', views.crear),
     path('mostrar/', views.mostrar),
 ]
