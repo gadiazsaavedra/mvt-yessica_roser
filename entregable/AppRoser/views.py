@@ -1,22 +1,40 @@
-from sqlite3 import Timestamp
+
 from django.http import HttpResponse
-from django.shortcuts import render
-from .models import Familiares
+from django.shortcuts import render, redirect
+from .models import Integrante
 from datetime import datetime
 
 # Create your views here.
 
-def agregar_familiar(request, nombre, apellido, edad, fecha_nacimiento, parentesco):
-    integrante = Familiares(nombre=nombre, apellido=apellido, edad=edad, fecha_nacimiento=fecha_nacimiento, parentesco=parentesco)
-    fecha_nacimiento = datetime.strptime('%d/%m/%Y', "fecha_nacimiento")
+def base(request):
+    return redirect(index)
+
+
+def mostrar(request):
+    data = {
+        'data' : Integrante.objects.all(),
+    }
+    return render(request, 'mostrar.html', data)
+
+
+def crear(request, dni : int = None, nombre : str = None, apellido = None):
+    if (nombre == None or apellido == None or dni == None):
+        return redirect(index)
+    
+    integrante = Integrante(nombre = nombre, apellido = apellido, dni = dni, alta = datetime.now())
     integrante.save()
 
-    return HttpResponse('lista_familiares')
-   
-    
-def lista_familiares(request):
-    
-    lista =  Familiares.objects.all()
+    data = {
+        'titulo' : 'Familiar creado',
+        'subtitulo' : apellido + ', ' + nombre,
+    }
+    return render(request, 'crear.html', data)
 
-    return render(request, "lista_familiares.html", {"lista_familiares":lista})
+
+def index(request):
+    data = {
+        'titulo' : 'Nuestro Primer MVT',
+        'subtitulo' : 'Agenda Familiar',
+    }
+    return render(request, 'index.html', data)
 
