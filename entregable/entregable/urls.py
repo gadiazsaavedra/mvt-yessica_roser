@@ -20,6 +20,6 @@ from AppRoser.views import base
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base),
-    path('familia/', include('familia.urls')),
+    path('AppRoser/', include('AppRoser.urls')),
 
 
