@@ -6,6 +6,6 @@ class Integrante(models.Model):
 
    nombre = models.CharField(max_length=50)
    apellido = models.CharField(max_length=50)
-   edad = models.IntegerField(default = None)
+   dni = models.IntegerField(default = None)
    alta = models.DateField(default = None)
    
