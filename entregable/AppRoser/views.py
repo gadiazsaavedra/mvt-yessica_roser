@@ -18,16 +18,13 @@ def mostrar(request):
 
 
 def crear(request, dni : int = None, nombre : str = None, apellido = None):
-    if (nombre == None or apellido == None or dni == None):
+    if nombre is None or apellido is None or dni is None:
         return redirect(index)
-    
+
     integrante = Integrante(nombre = nombre, apellido = apellido, dni = dni, alta = datetime.now())
     integrante.save()
 
-    data = {
-        'titulo' : 'Familiar creado',
-        'subtitulo' : apellido + ', ' + nombre,
-    }
+    data = {'titulo': 'Familiar creado', 'subtitulo': f'{apellido}, {nombre}'}
     return render(request, 'crear.html', data)
 
 
